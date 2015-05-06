@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>Fog WorkShop</title>
+
+    <!-- CSS  -->
+    <!-- Compiled and minified CSS -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <style>
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            -webkit-transform-origin: center center 50px;
+            -ms-transform-origin: center center 50px;
+            transform-origin: center center 50px;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .tile {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #1dad86;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: all 1s;
+            transition: all 1s;
+        }
+        
+        .right {
+            -webkit-transform-origin: left bottom;
+            -ms-transform-origin: left bottom;
+            transform-origin: left bottom;
+            -webkit-transform: translateX(200px) rotateY(0deg);
+            transform: translateX(200px) rotateY(0deg);
+        }
+        
+        .right.folded {
+            -webkit-transform: translateX(200px) rotateY(-90deg);
+            transform: translateX(200px) rotateY(-90deg);
+            background: #1ba07c;
+        }
+        
+        .top {
+            -webkit-transform-origin: left bottom;
+            -ms-transform-origin: left bottom;
+            transform-origin: left bottom;
+            -webkit-transform: translateY(-200px) rotateY(0deg);
+            transform: translateY(-200px) rotateY(0deg);
+        }
+        
+        .top.folded {
+            -webkit-transform: translateY(-200px) rotateX(-90deg);
+            transform: translateY(-200px) rotateX(-90deg);
+            background: #199775;
+        }
+        
+        .left {
+            -webkit-transform-origin: right bottom;
+            -ms-transform-origin: right bottom;
+            transform-origin: right bottom;
+            -webkit-transform: translateX(-200px) rotateY(0deg);
+            transform: translateX(-200px) rotateY(0deg);
+        }
+        
+        .left.folded {
+            -webkit-transform: translateX(-200px) rotateY(90deg);
+            transform: translateX(-200px) rotateY(90deg);
+            background: #178a6b;
+        }
+        
+        .front {
+            -webkit-transform-origin: left bottom;
+            -ms-transform-origin: left bottom;
+            transform-origin: left bottom;
+            -webkit-transform: translateY(-200px) rotateY(0deg);
+            transform: translateY(-200px) rotateY(0deg);
+        }
+        
+        .front.folded {
+            -webkit-transform: translateY(-200px) rotateX(-90deg);
+            transform: translateY(-200px) rotateX(-90deg);
+            background: #1a9c78;
+        }
+        
+        .back {
+            -webkit-transform-origin: left top;
+            -ms-transform-origin: left top;
+            transform-origin: left top;
+            -webkit-transform: translateY(200px) rotateY(0deg);
+            transform: translateY(200px) rotateY(0deg);
+        }
+        
+        .back.folded {
+            -webkit-transform: translateY(200px) rotateX(90deg);
+            transform: translateY(200px) rotateX(90deg);
+            background: #178a6b;
+        }
+        
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16.66667px;
+            color: white;
+        }
+        
+        .fold-text {
+            -webkit-transform: translate3d(-50%, -50%, 1px);
+            transform: translate3d(-50%, -50%, 1px);
+            transform: rotate(90deg);
+        }
+        
+        .unfold-text {
+            -webkit-transform: translate3d(-50%, -50%, -1px) rotateY(180deg) rotateZ(90deg);
+            transform: translate3d(-50%, -50%, -1px) rotateY(180deg) rotateZ(90deg);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+        <div class="box">
+            <div class="tile bottom">
+            </div>
+            <div class="tile left">
+                <div class="tile back"></div>
+            </div>
+            <div class="tile front">
+                <div class="tile right">
+                    <div class="tile top">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+        (function () {
+
+
+            $(".box").click(function () {
+                $(".tile").toggleClass('folded');
+            });
+
+//            rotate with mouse
+            
+//            $('.main').mousemove(function (event) {
+//                var y = (event.pageX - (window.innerWidth / 2)) * (100 / window.innerWidth);
+//                var x = (event.pageY - (window.innerHeight / 2)) * (100 / window.innerHeight) * -1;
+//
+//                box.css({
+//                    transform: 'translate(-50%, -50%) rotateY(' + y + 'deg) rotateX(' + x + 'deg)'
+//                });
+//            });
+
+//            function demo() {
+//                setTimeout(function () {
+//                    toggle();
+//                    setTimeout(function () {
+//                        toggle();
+//                    }, 2000);
+//                }, 1000);
+//            }
+//
+//            demo();
+
+        })();
+    </script>
+</body>
+
+
+</html>

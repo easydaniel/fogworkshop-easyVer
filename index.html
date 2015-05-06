@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>Fog WorkShop</title>
+
+    <!-- CSS  -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        a.darken {
+            display: inline-block;
+            background: black;
+            padding: 0;
+        }
+        
+        a.darken img {
+            display: block;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -ms-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+        }
+        
+        a.darken:hover img {
+            opacity: 0.7;
+        }
+        
+        .typed-cursor {
+            opacity: 1;
+            color: white;
+            -webkit-animation: blink 0.7s infinite;
+            -moz-animation: blink 0.7s infinite;
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @-webkit-keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @-moz-keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        /*        BOX CSS ---*/
+        
+        .box {
+            width: 200px;
+            height: 200px;
+            -webkit-transform-origin: center center 50px;
+            -ms-transform-origin: center center 50px;
+            transform-origin: center center 50px;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            margin-top: 50%;
+            margin-left: 50%;
+        }
+        
+        .tile {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #1dad86;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: all 1.5s;
+            transition: all 1.5s;
+        }
+        
+        .right {
+            -webkit-transform-origin: left bottom;
+            -ms-transform-origin: left bottom;
+            transform-origin: left bottom;
+            -webkit-transform: translateX(200px) rotateY(0deg);
+            transform: translateX(200px) rotateY(0deg);
+        }
+        
+        .right.folded {
+            -webkit-transform: translateX(200px) rotateY(-90deg);
+            transform: translateX(200px) rotateY(-90deg);
+            background: #1ba07c;
+        }
+        
+        .top {
+            -webkit-transform-origin: left bottom;
+            -ms-transform-origin: left bottom;
+            transform-origin: left bottom;
+            -webkit-transform: translateY(-200px) rotateY(0deg);
+            transform: translateY(-200px) rotateY(0deg);
+        }
+        
+        .top.folded {
+            -webkit-transform: translateY(-200px) rotateX(-90deg);
+            transform: translateY(-200px) rotateX(-90deg);
+            background: #199775;
+        }
+        
+        .left {
+            -webkit-transform-origin: right bottom;
+            -ms-transform-origin: right bottom;
+            transform-origin: right bottom;
+            -webkit-transform: translateX(-200px) rotateY(0deg);
+            transform: translateX(-200px) rotateY(0deg);
+        }
+        
+        .left.folded {
+            -webkit-transform: translateX(-200px) rotateY(90deg);
+            transform: translateX(-200px) rotateY(90deg);
+            background: #178a6b;
+        }
+        
+        .front {
+            -webkit-transform-origin: left bottom;
+            -ms-transform-origin: left bottom;
+            transform-origin: left bottom;
+            -webkit-transform: translateY(-200px) rotateY(0deg);
+            transform: translateY(-200px) rotateY(0deg);
+        }
+        
+        .front.folded {
+            -webkit-transform: translateY(-200px) rotateX(-90deg);
+            transform: translateY(-200px) rotateX(-90deg);
+            background: #1a9c78;
+        }
+        
+        .back {
+            -webkit-transform-origin: left top;
+            -ms-transform-origin: left top;
+            transform-origin: left top;
+            -webkit-transform: translateY(200px) rotateY(0deg);
+            transform: translateY(200px) rotateY(0deg);
+        }
+        
+        .back.folded {
+            -webkit-transform: translateY(200px) rotateX(90deg);
+            transform: translateY(200px) rotateX(90deg);
+            background: #178a6b;
+        }
+        
+        .fold-text {
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            -webkit-transform-origin: left bottom;
+            -webkit-transform: translate3d(-50%, -50%, 1px);
+            transform: translate3d(-50%, -50%, 1px);
+            
+        }
+        
+        .unfold-text {
+            -webkit-transform: translate3d(-50%, -50%, -1px) rotateY(180deg) rotateZ(90deg);
+            transform: translate3d(-50%, -50%, -1px) rotateY(180deg) rotateZ(90deg);
+        }
+    </style>
+    <!-- Compiled and minified JavaScript -->
+
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="z-depth-5">
+            <div class="blue-grey darken-3 nav-wrapper">
+                <a href="#!" class="brand-logo">&nbsp;Fog WorkShop</a>
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#home">Home</a>
+                    </li>
+                    <li><a href="#intro">Intro</a>
+                    </li>
+                    <li><a href="#team">Team</a>
+                    </li>
+                    <li><a href="#projects">Projects</a>
+                    </li>
+                </ul>
+                <ul class="table-of-contents side-nav" id="mobile-nav">
+                    <li><a href="#home">Home</a>
+                    </li>
+                    <li><a href="#intro">Intro</a>
+                    </li>
+                    <li><a href="#team">Team</a>
+                    </li>
+                    <li><a href="#projects">Projects</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+    <section class="scrollspy" id="home">
+        <div class="valign-wrapper parallax-container" style="height:800px">
+            <div class="container">
+                <h1 class="valign center white-text">Fog WorkShop</h1>
+                <div style="font-size:25px" class="center">
+
+                    <span class="center white-text">&nbsp;</span>
+                    <span class="typed center white-text"></span>
+                    <span id="typed-cursor"></span>
+
+                </div>
+                <br>
+
+                <div class="center">
+                    <a href="#intro" class="center waves-effect waves-light btn-large">Learn More</a>
+                </div>
+            </div>
+            <div class="parallax"><img src="img/backgroud-1.jpg">
+            </div>
+        </div>
+    </section>
+    <section class="scrollspy" id="intro">
+        <div class="container">
+            <div class="row">
+                <h3 class="center blue-grey-text">We Focus On Customizing</h3>
+                <div class="col s12 m4 l4 wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
+                    <h2 class="center blue-grey-text">
+                <i class="large blue-text mdi-editor-attach-money"></i>
+            </h2>
+                    <h5 class="center blue-grey-text">
+                Fair Price
+            </h5>
+                    <p class="center light">
+                        You can get amazing product with great price!
+                    </p>
+                </div>
+                <div class="col s12 m4 l4">
+                    <h2 class="center blue-grey-text">
+                <i class="large red-text mdi-action-favorite-outline"></i>
+            </h2>
+                    <h5 class="center blue-grey-text">
+                        Build With Love
+            </h5>
+                    <p class="center light">
+
+                    </p>
+                </div>
+                <div class="col s12 m4 l4">
+                    <h2 class="center blue-grey-text">
+                        <i class="large green-text mdi-action-extension"></i>
+                    </h2>
+                    <h5 class="center blue-grey-text">
+                        Customizing
+                    </h5>
+                    <p class="center light">
+                        We can achieve !
+                    </p>
+                </div>
+            </div>
+            <p class="center flow-text">We build Web, Application, Software Design....etc</p>
+        </div>
+    </section>
+    <section class="scrollspy" id="team">
+        <div class="container">
+            <div class="center">
+                <div class="row">
+                    <div class="col s12 m6 l4" style="margin-top:10%;margin-left:30%;margin-bottom:10%;">
+                       <h4 class="blue-grey-text"><i class="mdi-social-people"></i> Our Team</h4>
+                    <div class="box">
+                        <div class="tile bottom"></div>
+                        <div class="tile back"></div>
+                        <div class="tile left"></div>
+                        <div class="tile right">
+                            <div class="tile top"></div>
+                            <div class="tile right"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col s">
+                    <h2 class="blue-grey-text center"><i class="mdi-social-people"></i> Our Team</h2>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <a class="darken card-image modal-trigger" href="#kevin1">
+                                <img src="img/kevinchen.jpg">
+                                <span class="card-title">Kevin 陳冠穎</span>
+                            </a>
+                            <div class="card-content">
+                                <p>hello world</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <a class="darken card-image modal-trigger" href="#micro">
+                                <img src="img/mirco.jpg">
+                                <span class="card-title">Micro 謝明恩</span>
+                            </a>
+                            <div class="card-content">
+                                <p>hello world</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <a class="darken card-image modal-trigger" href="#hank">
+                                <img src="img/hank.jpg">
+                                <span class="card-title">Hank 李浩平</span>
+                            </a>
+                            <div class="card-content">
+                                <p>hello world</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <a class="darken card-image modal-trigger" href="#easy">
+                                <img src="img/easy.jpg">
+                                <span class="card-title">Easy 簡聃</span>
+                            </a>
+                            <div class="card-content">
+                                <span class="center" id="easytxt"></span>
+                                <span id="typed-cursor" style="color:black;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <a class="darken card-image modal-trigger" href="#allen">
+                                <img src="img/allen.jpg">
+                                <span class="card-title">Allen 吳赫倫</span>
+                            </a>
+                            <div class="card-content">
+                                <span class="center" id="allentxt"></span>
+                                <span id="typed-cursor" style="color:black;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <a class="darken card-image modal-trigger" href="#kevin2">
+                                <img src="img/kevinchen2.jpg">
+                                <span class="card-title">小T 陳俊凱</span>
+                            </a>
+                            <div class="card-content">
+                                <span class="center" id="tocktxt"></span>
+                                <span id="typed-cursor" style="color:black;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="scrollspy" id="projects">
+        <div class="container" id="projects">
+            <div class="row">
+                <div class="col s12">
+                    <h2 class="blue-grey-text center"><i class="mdi-av-web"></i> Projects</h2>
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header">交通大學EDA實驗室網站</div>
+                            <div class="collapsible-body">
+                                <p>
+                                    <a href="eda.nctu.edu.tw" class="right waves-effect waves-light btn">Take a look</a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">BIZTaiwan官方網站</div>
+                            <div class="collapsible-body">
+                                <p>Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">交通大學Online Judge</div>
+                            <div class="collapsible-body">
+                                <p>Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="page-footer blue-grey darken-6">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a>
+                        </li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a>
+                        </li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a>
+                        </li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2015 Fog Workshop
+            </div>
+        </div>
+    </footer>
+    <div id="kevin1" class="modal">
+        <div class="modal-content">
+            <h4>Kevin 陳冠穎</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="micro" class="modal">
+        <div class="modal-content">
+            <h4>Micro 謝明恩</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="hank" class="modal">
+        <div class="modal-content">
+            <h4>Hank 李浩平</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="easy" class="modal">
+        <div class="modal-content">
+            <h4>Easy 簡聃</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="allen" class="modal">
+        <div class="modal-content">
+            <h4>Allen 吳赫倫</h4>
+            <p>I am a funny cat!</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="kevin2" class="modal">
+        <div class="modal-content">
+            <h4>小T 陳俊凱</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    <script src="js/typed.min.js"></script>
+    <script src="js/jquery.flip.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //   $('#modal1').openModal();
+            $("#flip").flip();
+            $('.modal-trigger').leanModal();
+            $('.scrollspy').scrollSpy();
+            $(".button-collapse").sideNav();
+            $('.parallax').parallax();
+            $('.collapsible').collapsible({
+                accordion: true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+            });
+            $(function () {
+                $(".typed").typed({
+                    strings: ["^500 Your Nice ^1000", "Your Ultimate Customizing Devolopers"],
+                    typeSpeed: 100,
+                    backSpeed: 50,
+                    showCursor: true,
+                    cursorChar: "▏",
+                });
+                $("#allentxt").typed({
+                    strings: ["^500 Your ... ^1000", "我是天才喵咪"],
+                    typeSpeed: 100,
+                    backSpeed: 50,
+                    showCursor: true,
+                    cursorChar: "▏",
+                });
+                $("#easytxt").typed({
+                    strings: ["^500 I... ^1000", "我是超級帥哥"],
+                    typeSpeed: 100,
+                    backSpeed: 50,
+                    showCursor: true,
+                    cursorChar: "▏",
+                });
+                $("#tocktxt").typed({
+                    strings: ["^500 We are... ^1000", "我是怪咖中二"],
+                    typeSpeed: 100,
+                    backSpeed: 50,
+                    showCursor: true,
+                    cursorChar: "▏",
+                });
+                $(".box").click(function () {
+                    $(".tile").toggleClass('folded');
+                });
+            });
+
+
+
+            new WOW().init();
+        });
+    </script>
+
+</body>
+
+
+</html>
